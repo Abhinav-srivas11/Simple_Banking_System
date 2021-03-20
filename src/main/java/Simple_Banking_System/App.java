@@ -12,11 +12,15 @@ public class App {
     static DataBaseWorker dataBaseWorker = null;
     static boolean endRunning = false;
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         dataBaseWorker = new DataBaseWorker(args[1]);
         //args[1] because -fileName will be the first argument
-        while (!endRunning) {
-            mainMenu();
+        try {
+            while (!endRunning) {
+                mainMenu();
+            }
+        catch (SQLException e) {
+            e.printStackTrace();       
         }
     }
 
