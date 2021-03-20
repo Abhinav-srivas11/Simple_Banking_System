@@ -43,15 +43,6 @@ public class DataBaseWorker {
     // now function to insert details of the user
     public void enterNewUserDetails(long cardNumber, int pinOfCard) {
         try {
-
-//            (ResultSet rs = statement.executeQuery("SELECT number FROM card;"))
-//            while (rs.next()) {
-//                if (rs.getString("number").equals(Long.toString(cardNumber))) {
-//                    present = true;
-//                    break;
-//                }
-//            }
-//            if (isResultSetEmpty(cardNumber)) {
             con = dataSource.getConnection();
             statement = con.createStatement();
             System.out.println("card : " + cardNumber + " pin " + pinOfCard);
@@ -101,7 +92,7 @@ public class DataBaseWorker {
             con = dataSource.getConnection();
             statement = con.createStatement();
             if (con.isClosed()) {
-                System.out.println("Conn is closed abhi");
+                System.out.println("Conn is closed");
             }
             statement.executeUpdate("UPDATE card SET balance = " + balance + " WHERE number = " + cardNumber);
             System.out.println("Income was added!");
@@ -136,11 +127,6 @@ public class DataBaseWorker {
                 con.close();
                 return true;
             }
-//            while (bankRecord.next()){
-//                System.out.println(bankRecord.getString("number"));
-////                System.out.println(bankRecord.getString("pin"));
-////                System.out.println(bankRecord.getInt("balance"));
-//            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
