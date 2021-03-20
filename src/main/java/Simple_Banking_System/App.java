@@ -53,27 +53,24 @@ public class App {
         cardNumber += luhnAlgo(cardNumber);
 //        int pinOfCard = random.nextInt(10_000 - 1000) + 1000;
         int pinOfCard = random.nextInt(10_000 - 1000) + 1000;
-//        if (dataBaseWorker.enterNewUserDetails(cardNumber, pinOfCard) == 1) {
+        
         dataBaseWorker.enterNewUserDetails(cardNumber, pinOfCard);
+        
         System.out.println("Your card number has been created");
-//            cardNumberEntries.put(cardNumber, pinOfCard);
-//            accountBalance.put(cardNumber, 0);
+        
         System.out.println("Your card number:");
         System.out.println(cardNumber);
         System.out.println("Your card PIN:");
         System.out.println(pinOfCard);
-//        } else {
-//            System.out.println("mai tumhara yha intezaar kr rha hu");
-//            creation();
-//        }
 
     }
 
     private static void logIntoAccount(long cardNumber, int pinOfCard) throws SQLException {
-        if (luhnAlgoTest(cardNumber)) {
-            if (dataBaseWorker.logOnFunction(cardNumber, pinOfCard)) {
+        if (luhnAlgoTest(cardNumber)) { //checks if card number is luhn algorithm compatible or not
+            //if the algorithm is fine then we can start logging in to database
+            if (dataBaseWorker.logOnFunction(cardNumber, pinOfCard)) { //log on to the database using the card number and pin of the card
                 System.out.println("You have successfully logged in!");
-                optionsAfterLogon(cardNumber);
+                optionsAfterLogon(cardNumber); //show options for the card number
             } else {
                 System.out.println("Wrong card number or PIN!");
             }
@@ -141,13 +138,14 @@ public class App {
                 requiredDigits[i] *= 2;
             }
         }
+        
         for (int i = 0; i < 16; i++) {
             if (requiredDigits[i] > 9) {
                 requiredDigits[i] -= 9;
             }
             sum += requiredDigits[i];
         }
-//        sum += 8;
+
         for (int i = 0; i <= 9; i++) {
             if ((sum + i) % 10 == 0) {
                 checksum = i;
